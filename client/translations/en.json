@@ -1,0 +1,17 @@
+{
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "register": "Register",
+  "confirmPassword": "Confirm Password",
+  "validations": {
+    "required": "Required field!",
+    "min": "Min length is ?!",
+    "max": "Max length is ?!",
+    "digit": "Must contain a digit!",
+    "uppercase": "Must contain an uppercase character!",
+    "lowercase": "Must contain a lowercase character!",
+    "specialChar": "Must contain a special character(!@#$%^&*)!",
+    "passwordsMatch": "Passwords must match"
+  }
+}
