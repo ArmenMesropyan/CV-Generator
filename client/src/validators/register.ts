@@ -23,8 +23,8 @@ export const useRegisterValidationSchema = () => {
           .matches(regexLibrary.lowercase, t("validations.lowercase"))
           .matches(regexLibrary.specialChar, t("validations.specialChar")),
         confirm_password: string()
-          .required(t("validation.reqired"))
-          .oneOf([ref("password")], t("validation.passwordsMatch")),
+          .required(t("validations.required"))
+          .oneOf([ref("password")], t("validations.passwordsMatch")),
       }),
     [t]
   );

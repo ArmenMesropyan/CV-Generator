@@ -1,21 +1,26 @@
 import { Input, InputProps } from "@ui-kitten/components";
 import { FastField, FastFieldProps } from "formik";
-import { FC } from "react";
+import { ComponentType, FC } from "react";
 
 export interface InputFieldProps extends InputProps {
   name: string;
+  component?: ComponentType<InputProps>;
 }
 
-const InputField: FC<InputFieldProps> = ({ name, ...props }) => (
+const InputField: FC<InputFieldProps> = ({
+  name,
+  component: Component = Input,
+  ...props
+}) => (
   <FastField name={name}>
     {({
       form: { setFieldValue },
       field: { name },
       meta: { value, error },
     }: FastFieldProps) => (
-      <Input
+      <Component
         {...props}
-        status={error ? "danger" : undefined}
+        status={error ? "danger" : "basic"}
         value={value}
         caption={error}
         onChangeText={(nextValue) => setFieldValue(name, nextValue)}

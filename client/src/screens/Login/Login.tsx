@@ -1,11 +1,20 @@
-import { Button } from "@ui-kitten/components";
+import { Button, ProgressBar, Text } from "@ui-kitten/components";
 import { Formik } from "formik";
-import React, { FC } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
-import { AuthWrapper, InputField, Logo } from "../../components";
+import { useDispatch } from "react-redux";
+import {
+  AuthUIWrapper,
+  InputField,
+  Logo,
+  PasswordInput,
+} from "../../components";
 import { LoginRequestModel } from "../../models";
+import { useLoginMutation } from "../../store/services/auth";
+import { userSlice } from "../../store/slices";
 import { PropsWithNavigation } from "../../types";
+import { CustomErrors, RequestError } from "../../types/error";
 import { useLoginValidationSchema } from "../../validators";
 
 const initialValues: LoginRequestModel = {
@@ -14,18 +23,48 @@ const initialValues: LoginRequestModel = {
 };
 
 const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const { t } = useTranslation();
 
   const validationSchema = useLoginValidationSchema();
 
+  const [login, { data, error, isLoading }] = useLoginMutation();
+
+  const errorTexts = useMemo<Record<string, string>>(
+    () => ({
+      [CustomErrors.InvalidCredentials]: t("invalidCredentials"),
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (!data) return;
+
+    dispatch(userSlice.actions.addUser(data));
+    navigation.replace("CVList", {});
+  }, [data]);
+
   return (
-    <AuthWrapper>
-      <Logo style={{ marginBottom: 40 }} />
+    <AuthUIWrapper>
+      <View style={{ marginBottom: 30 }}>
+        <Logo style={{ marginBottom: 10 }} />
+
+        {isLoading && <ProgressBar />}
+
+        {error && !isLoading && (
+          <Text status="danger">
+            {errorTexts[(error as RequestError).data.status_code] || ""}
+          </Text>
+        )}
+      </View>
 
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={console.log}
+        onSubmit={(data) => {
+          !isLoading && login(data);
+        }}
       >
         {(form) => (
           <View>
@@ -37,6 +76,7 @@ const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
 
             <InputField
               label={t("password")}
+              component={PasswordInput}
               name="password"
               style={{ marginBottom: 50 }}
             />
@@ -54,7 +94,7 @@ const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
           </View>
         )}
       </Formik>
-    </AuthWrapper>
+    </AuthUIWrapper>
   );
 };
 

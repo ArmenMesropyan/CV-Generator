@@ -2,7 +2,7 @@ import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@ui-kitten/components";
 import { FC, PropsWithChildren } from "react";
 
-const StyledNavigationContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
+const StyledNavigationContainer: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
 
   return (

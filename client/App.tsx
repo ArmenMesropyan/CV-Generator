@@ -1,11 +1,14 @@
 import * as eva from "@eva-design/eva";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ApplicationProvider } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { useColorScheme } from "react-native";
-import { StyledNavigationContainer } from "./src/components";
+import { Provider } from "react-redux";
+import { AuthWrapper, StyledNavigationContainer } from "./src/components";
 import { screens } from "./src/screens/config";
+import { store } from "./src/store";
 import en from "./translations/en.json";
 
 const Stack = createNativeStackNavigator();
@@ -29,26 +32,32 @@ const App = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <ApplicationProvider
-      {...eva}
-      theme={colorScheme ? eva[colorScheme] : eva.light}
-    >
-      <StyledNavigationContainer>
-        <Stack.Navigator>
-          {Object.entries(screens).map(([name, component], index) => (
-            <Stack.Screen
-              key={index}
-              name={name}
-              component={component}
-              options={{
-                headerTitle: "",
-                headerShadowVisible: false,
-              }}
-            />
-          ))}
-        </Stack.Navigator>
-      </StyledNavigationContainer>
-    </ApplicationProvider>
+    <Provider store={store}>
+      <AuthWrapper>
+        <ApplicationProvider
+          {...eva}
+          theme={colorScheme ? eva[colorScheme] : eva.light}
+        >
+          <IconRegistry icons={EvaIconsPack} />
+
+          <StyledNavigationContainer>
+            <Stack.Navigator>
+              {Object.entries(screens).map(([name, component], index) => (
+                <Stack.Screen
+                  key={index}
+                  name={name}
+                  component={component}
+                  options={{
+                    headerTitle: "",
+                    headerShadowVisible: false,
+                  }}
+                />
+              ))}
+            </Stack.Navigator>
+          </StyledNavigationContainer>
+        </ApplicationProvider>
+      </AuthWrapper>
+    </Provider>
   );
 };
 

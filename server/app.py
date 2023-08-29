@@ -1,12 +1,12 @@
 import os
 
-from dotenv import load_dotenv
-from flask import Flask
-from flask_migrate import Migrate
-from flask_restful import Api
-
 from common.handle_error import handle_error
 from db import db
+from dotenv import load_dotenv
+from flask import Flask
+from flask_cors import CORS
+from flask_migrate import Migrate
+from flask_restful import Api
 from resources.cv import CV
 from resources.login import Login
 from resources.register import Register
@@ -16,6 +16,7 @@ load_dotenv()
 
 app = Flask(__name__)
 api = Api(app, '/api')
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 

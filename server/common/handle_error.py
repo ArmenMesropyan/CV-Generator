@@ -7,6 +7,7 @@ def handle_error(error):
             'error': getattr(error, 'message'),
             'status_code': getattr(error, 'status_code')
         }
+        print(response)
         return jsonify(response), getattr(error, 'response_code')
     except:
         return error

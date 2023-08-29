@@ -13,5 +13,7 @@
     "lowercase": "Must contain a lowercase character!",
     "specialChar": "Must contain a special character(!@#$%^&*)!",
     "passwordsMatch": "Passwords must match"
-  }
+  },
+  "invalidCredentials": "Invalid credentials!",
+  "userAlreadyExist": "Username already exists!"
 }

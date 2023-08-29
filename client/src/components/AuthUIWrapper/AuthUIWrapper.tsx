@@ -2,7 +2,7 @@ import { Layout } from "@ui-kitten/components";
 import React, { FC, PropsWithChildren } from "react";
 import { View } from "react-native";
 
-const AuthWrapper: FC<PropsWithChildren<{}>> = ({ children }) => (
+const AuthUIWrapper: FC<PropsWithChildren> = ({ children }) => (
   <Layout
     style={{
       height: "100%",
@@ -14,4 +14,4 @@ const AuthWrapper: FC<PropsWithChildren<{}>> = ({ children }) => (
   </Layout>
 );
 
-export default AuthWrapper;
+export default AuthUIWrapper;
