@@ -23,7 +23,11 @@ const InputField: FC<InputFieldProps> = ({
         status={error ? "danger" : "basic"}
         value={value}
         caption={error}
-        onChangeText={(nextValue) => setFieldValue(name, nextValue)}
+        onChangeText={(nextValue) => {
+          setFieldValue(name, nextValue);
+
+          props.onChangeText?.(nextValue);
+        }}
       />
     )}
   </FastField>

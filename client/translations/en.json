@@ -15,5 +15,12 @@
     "passwordsMatch": "Passwords must match"
   },
   "invalidCredentials": "Invalid credentials!",
-  "userAlreadyExist": "Username already exists!"
+  "userAlreadyExist": "Username already exists!",
+  "yourCvs": "Your CV's",
+  "add": "Add",
+  "close": "Close",
+  "name": "Name",
+  "nameAlreadyExists": "Name already exists!",
+  "noCVAdded": "You don't have any CV added!",
+  "logout": "Log out"
 }

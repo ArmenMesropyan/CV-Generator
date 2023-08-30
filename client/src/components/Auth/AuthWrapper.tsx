@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { FC, PropsWithChildren, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { storageConstants } from "../../configs";
 import { useLazyGetUserQuery } from "../../store/services";
 import { selectUser, userSlice } from "../../store/slices";
 import { RootStackNavigationProp } from "../../types";
@@ -16,7 +17,7 @@ const AuthWrapper: FC<PropsWithChildren> = ({ children }) => {
   const [getUser] = useLazyGetUserQuery();
 
   const getUserByStorageToken = useCallback(async () => {
-    const jwtToken = await AsyncStorage.getItem("jwt-token");
+    const jwtToken = await AsyncStorage.getItem(storageConstants.TOKEN);
 
     if (!jwtToken) return;
 
@@ -44,7 +45,7 @@ const AuthWrapper: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user?.token) AsyncStorage.setItem("jwt-token", user.token);
+    if (user?.token) AsyncStorage.setItem(storageConstants.TOKEN, user.token);
   }, [user?.token]);
 
   useEffect(() => {

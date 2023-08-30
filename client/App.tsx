@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import i18n from "i18next";
+import { ComponentType } from "react";
 import { initReactI18next } from "react-i18next";
 import { useColorScheme } from "react-native";
 import { Provider } from "react-redux";
@@ -46,7 +47,7 @@ const App = () => {
                 <Stack.Screen
                   key={index}
                   name={name}
-                  component={component}
+                  component={component as ComponentType}
                   options={{
                     headerTitle: "",
                     headerShadowVisible: false,

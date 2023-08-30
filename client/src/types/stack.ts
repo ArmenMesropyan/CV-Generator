@@ -2,7 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { screens } from "../screens/config";
 
-type RootStackParamList = {
+export type RootStackParamList = {
   [key in keyof typeof screens]: Omit<
     React.ComponentProps<(typeof screens)[key]>,
     "navigation"

@@ -1,15 +1,10 @@
-import { Button, ProgressBar, Text } from "@ui-kitten/components";
+import { Button } from "@ui-kitten/components";
 import { Formik } from "formik";
 import React, { FC, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { useDispatch } from "react-redux";
-import {
-  AuthUIWrapper,
-  InputField,
-  Logo,
-  PasswordInput,
-} from "../../components";
+import { InputField, PageWrapper, PasswordInput } from "../../components";
 import { LoginRequestModel } from "../../models";
 import { useLoginMutation } from "../../store/services/auth";
 import { userSlice } from "../../store/slices";
@@ -49,19 +44,12 @@ const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
   }, [data]);
 
   return (
-    <AuthUIWrapper>
-      <View style={{ marginBottom: 30 }}>
-        <Logo style={{ marginBottom: 10 }} />
-
-        {isLoading && <ProgressBar />}
-
-        {error && !isLoading && (
-          <Text status="danger">
-            {errorTexts[(error as RequestError).data.status_code] || ""}
-          </Text>
-        )}
-      </View>
-
+    <PageWrapper
+      error={
+        (error && errorTexts[(error as RequestError).data.status_code]) || ""
+      }
+      isLoading={isLoading}
+    >
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -97,7 +85,7 @@ const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
           </View>
         )}
       </Formik>
-    </AuthUIWrapper>
+    </PageWrapper>
   );
 };
 
