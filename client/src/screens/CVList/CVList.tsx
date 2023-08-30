@@ -8,7 +8,6 @@ import { PropsWithNavigation } from "../../types";
 
 const CVList: FC<PropsWithNavigation<"CVList">> = ({ navigation }) => {
   const user = useSelector(selectUser);
-  console.log("🚀 ~ file: CVList.tsx:11 ~ user:", user);
 
   return (
     <View>

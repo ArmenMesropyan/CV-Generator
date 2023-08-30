@@ -31,7 +31,6 @@ const Login: FC<PropsWithNavigation<"Register">> = ({ navigation }) => {
   const validationSchema = useRegisterValidationSchema();
 
   const [register, { data, error, isLoading }] = useRegisterMutation();
-  console.log("🚀 ~ file: Register.tsx:34 ~ error:", error);
 
   const errorTexts = useMemo<Record<string, string>>(
     () => ({
