@@ -31,6 +31,7 @@ const Login: FC<PropsWithNavigation<"Register">> = ({ navigation }) => {
   const validationSchema = useRegisterValidationSchema();
 
   const [register, { data, error, isLoading }] = useRegisterMutation();
+  console.log("🚀 ~ file: Register.tsx:34 ~ error:", error);
 
   const errorTexts = useMemo<Record<string, string>>(
     () => ({
@@ -43,7 +44,10 @@ const Login: FC<PropsWithNavigation<"Register">> = ({ navigation }) => {
     if (!data) return;
 
     dispatch(userSlice.actions.addUser(data));
-    navigation.replace("CVList", {});
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "CVList" }],
+    });
   }, [data]);
 
   return (
@@ -84,6 +88,7 @@ const Login: FC<PropsWithNavigation<"Register">> = ({ navigation }) => {
 
             <InputField
               label={t("confirmPassword")}
+              component={PasswordInput}
               name="confirm_password"
               style={{ marginBottom: 50 }}
             />

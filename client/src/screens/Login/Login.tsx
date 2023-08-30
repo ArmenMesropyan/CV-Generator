@@ -42,7 +42,10 @@ const Login: FC<PropsWithNavigation<"Login">> = ({ navigation }) => {
     if (!data) return;
 
     dispatch(userSlice.actions.addUser(data));
-    navigation.replace("CVList", {});
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "CVList" }],
+    });
   }, [data]);
 
   return (

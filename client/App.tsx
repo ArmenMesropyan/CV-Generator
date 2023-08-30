@@ -33,14 +33,14 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <AuthWrapper>
-        <ApplicationProvider
-          {...eva}
-          theme={colorScheme ? eva[colorScheme] : eva.light}
-        >
-          <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider
+        {...eva}
+        theme={colorScheme ? eva[colorScheme] : eva.light}
+      >
+        <IconRegistry icons={EvaIconsPack} />
 
-          <StyledNavigationContainer>
+        <StyledNavigationContainer>
+          <AuthWrapper>
             <Stack.Navigator>
               {Object.entries(screens).map(([name, component], index) => (
                 <Stack.Screen
@@ -54,9 +54,9 @@ const App = () => {
                 />
               ))}
             </Stack.Navigator>
-          </StyledNavigationContainer>
-        </ApplicationProvider>
-      </AuthWrapper>
+          </AuthWrapper>
+        </StyledNavigationContainer>
+      </ApplicationProvider>
     </Provider>
   );
 };
