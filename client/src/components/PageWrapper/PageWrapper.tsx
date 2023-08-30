@@ -44,14 +44,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = ({
     <Layout style={styles.layout}>
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          <View style={styles.logoWrapper}>
             <Logo style={styles.logo} />
 
             {user && (

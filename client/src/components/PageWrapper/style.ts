@@ -10,6 +10,12 @@ export const styles = StyleSheet.create({
     marginRight: "auto",
   },
   topContainer: { marginBottom: 30 },
+  logoWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   logo: {
     marginBottom: 10,
   },
